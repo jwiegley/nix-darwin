@@ -4,12 +4,6 @@ with lib;
 
 {
   options = {
-    enable = mkOption {
-      type = types.bool;
-      default = true;
-      description = "Whether this user should be created.";
-    };
-
     name = mkOption {
       type = types.str;
       description = ''
@@ -41,7 +35,7 @@ with lib;
 
     isHidden = mkOption {
       type = types.bool;
-      default = false;
+      default = true;
       description = "Whether to make the user account hidden.";
     };
 

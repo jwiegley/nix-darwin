@@ -63,6 +63,7 @@ let
         ./modules/programs/vim.nix
         ./modules/programs/zsh
         ./modules/users
+        ./modules/users/nixbld
       ];
   };
 
@@ -73,4 +74,6 @@ in
   inherit (eval) options config;
 
   system = eval.config.system.build.toplevel;
+
+  installer = pkgs.callPackage ./pkgs/darwin-installer {};
 }
