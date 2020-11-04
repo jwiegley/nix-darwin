@@ -37,13 +37,14 @@ jobs:
     - uses: actions/checkout@v2
     - uses: cachix/install-nix-action@v8
     - run: |
+        nix-channel --add https://nixos.org/channels/nixos-20.09 nixpkgs
         nix-channel --update
         echo "FIXME workaround channel permission error"
         nix-shell -A installer
         echo "TODO installed doesn't support flakes, handle multi-user install"
     - run: |
-        nix-shell -p nixFlakes --run 'nix --experimental-features "nix-command flakes" registry add darwin $PWD'
-        nix-shell -p nixFlakes --run 'nix --experimental-features "nix-command flakes" build ./modules/examples#darwinConfigurations.simple.system'
+        nix-shell -p nixUnstable --run 'nix --experimental-features "nix-command flakes" registry add darwin $PWD'
+        nix-shell -p nixUnstable --run 'nix --experimental-features "nix-command flakes" build ./modules/examples#darwinConfigurations.simple.system'
     - run: |
         ./result/sw/bin/darwin-rebuild switch --flake ./modules/examples#simple
     - run: |
